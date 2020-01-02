@@ -8,7 +8,7 @@
 </div>
 </div>  
   <hr>
-        <form method="POST" class="post-form" action="/index/manager/updateuser/{{user_info.pk}}">
+        <form method="POST" class="post-form" action="/index/manager/edituser/{{user_info.pk}}">
             {% csrf_token %}     
             <p><label for="id_usertype">Usertype:</label> <select name="usertype" required="" id="id_usertype">
               <option value="{{ user_info.usertype }}">---------</option>

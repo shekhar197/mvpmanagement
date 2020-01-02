@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="d-flex justify-content-center flex-wrap flex-row text-white">
+    <div class="p-2 bg-info">
+<h2> Welcome to MVP Bus Management System</h2>
+</div>
+</div>  
+  <hr>
+   {% if bus_info %}
+        <form method="POST" class="post-form" action="/index/manager/editbus/{{bus_info.pk}}">
+        {% csrf_token %}
+          <p><label for="id_bnum">Bnum:</label> <input type="text" name="bnum" value="{{bus_info.bnum}}" maxlength="10" required="" id="id_bnum"></p>
+          <p><label for="id_broute_from">Broute from:</label> <input type="text" name="broute_from" value="{{bus_info.broute_from}}" maxlength="100" required="" id="id_broute_from"></p>
+          <p><label for="id_broute_to">Broute to:</label> <input type="text" name="broute_to" value="{{bus_info.broute_to}}" maxlength="100" required="" id="id_broute_to"></p>
+          <p><label for="id_btrip">Btrip:</label> <input type="number" name="btrip" value="{{bus_info.btrip}}" required="" id="id_btrip"></p>
+          <p><label for="id_btriphrs">Btriphrs:</label> <input type="number" name="btriphrs" value="{{bus_info.btriphrs}}" required="" id="id_btriphrs"></p>
+          <p><label for="id_btotalfare">Btotalfare:</label> <input type="number" name="btotalfare" value="{{bus_info.btotalfare}}" required="" id="id_btotalfare"></p>
+          <p><label for="id_bseater">Bseater:</label> <input type="number" name="bseater" value="{{bus_info.bseater}}" required="" id="id_bseater"></p>
+          <button type="submit" class="btn btn-primary">Submit</button> 
+        </form>
+    {% endif %}
+    
+  
+  {% endblock %}

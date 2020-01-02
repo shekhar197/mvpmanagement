@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 User = get_user_model()
 from django.http import HttpResponse
+from django.contrib import messages
 
 @login_required
 def admin_create_agency(request):
@@ -35,17 +36,13 @@ def edit(request, id):
         form = UserForm(data=request.POST, instance=user_info)  
         if form.is_valid():  
             form.save()  
-            user_detail = User.objects.all()
-            messages = list()
-            messages.append(user_info.username +" successfully updated.")
-            return render(request, "mvpManagement/home.html", {'user_detail':user_detail, 'messages':messages} )  
+            messages.add_message(request, messages.INFO, user_info.username +" successfully updated.")
+            return redirect('/index')
         return render(request, 'mvpManagement/admin/edit.html', {'user_info':user_info})    
 
 @login_required
 def destroy(request, id):  
     user_info = User.objects.get(pk=id)
     user_info.delete()
-    messages = list()
-    messages.append(user_info.username +" successfully deleted.")
-    user_detail = User.objects.all()
-    return render(request, "mvpManagement/home.html", {'user_detail':user_detail, 'messages':messages} )  
+    messages.add_message(request, messages.INFO, user_info.username +" successfully deleted.")
+    return redirect('/index')

@@ -8,11 +8,10 @@ User = get_user_model()
 
 @login_required
 def home(request):
-    if request.user.is_authenticated:
-        if request.user.is_superuser:
-            user_detail = User.objects.all()
-            return render(request, 'mvpManagement/home.html',{'user_detail':user_detail})
-        elif request.user.usertype == '1':
-            return render(request, 'mvpManagement/home.html')
+    if request.user.is_superuser:
+        user_detail = User.objects.all()
+        return render(request, 'mvpManagement/home.html',{'user_detail':user_detail})
+    elif request.user.usertype == '1':
+        return render(request, 'mvpManagement/home.html')
 
 
