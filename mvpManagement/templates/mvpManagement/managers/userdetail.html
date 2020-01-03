@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-center flex-wrap flex-row text-white">
+    <div class="p-2 bg-info">
+<h2> Welcome to MVP Bus Management System</h2>
+</div>
+</div>
+<hr>
+{% if user_detail %}
+<div class="row">
+    <div class="col-md-6">
+            <div class="card">
+                    <div class="card-header">{{user_detail.username|upper}}</div>
+                    <div class="card-body"><ul>
+                        <li>First Name: {{user_detail.first_name|title}}</li>
+                        <li>Last Name: {{user_detail.last_name|title}}</li>
+                        <li>Username: {{user_detail.username}}</li>
+                        <li>Password: ****************</li>
+                        <li>Email Name: {{user_detail.email}}</li>
+                        <li>Date Join: {{user_detail.date_joined|date:"d/m/Y"}}</li>
+                        <li>Last Login: {{user_detail.last_login|date:"d/m/Y"}}</li>
+                        {% if user_detail.usertype == '2' %}
+                        <li>User Type: Driver</li>
+                        {% elif user_detail.usertype == '3' %}
+                        <li>User Type: Conductor</li>
+                        {% elif user_detail.usertype == '2' %}
+                        <li>User Type: Helper</li>
+                        {% endif %}
+                    </ul></div>
+                    <div class="card-footer" align="right">
+                        <a href="/index/manager/edituser/{{user.pk}}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
+                    </div>
+            </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

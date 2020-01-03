@@ -5,8 +5,9 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 from django.http import HttpResponse
 from django.contrib import messages
+from ..decorators import admin_required
 
-@login_required
+@admin_required
 def admin_create_agency(request):
     if request.method == "POST":
         form = UserForm(request.POST)
@@ -26,7 +27,7 @@ def admin_create_agency(request):
             form = UserForm()
             return render(request, 'mvpManagement/admin/userform.html', {'form':form})
 
-@login_required
+@admin_required
 def edit(request, id):
     if request.method == "GET":  
         user_info = User.objects.get(pk=id)
@@ -40,7 +41,7 @@ def edit(request, id):
             return redirect('/index')
         return render(request, 'mvpManagement/admin/edit.html', {'user_info':user_info})    
 
-@login_required
+@admin_required
 def destroy(request, id):  
     user_info = User.objects.get(pk=id)
     user_info.delete()

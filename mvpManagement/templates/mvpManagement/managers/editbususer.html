@@ -9,9 +9,9 @@
 </div>  
   <hr>
    {% if bus_info %}
-        <form method="POST" class="post-form" action="/index/manager/editbus/{{bus_info.pk}}">
+        <form method="POST" class="post-form" action="/index/manager/editbususer/{{bus_info.pk}}">
         {% csrf_token %}
-          {{form.as_p}}
+          {{form.as_table}}
           <button type="submit" class="btn btn-primary">Submit</button> 
         </form>
     {% endif %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-center flex-wrap flex-row text-white">
+    <div class="p-2 bg-info">
+<h2> Welcome to MVP Bus Management System</h2>
+</div>
+</div>
+<hr>
+<div class="row">
+        <div class="col-md-12">
+            <p class="lead text-primary">Bus Information</p>
+          </div>
+      </div>
+    <div class="row">
+        <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered table-hover">
+    <thead><tr>
+      <th>Sl No.</th>
+      <th>Bus Number</th>
+      <th>Bus Route From</th>
+      <th>Bus Route To</th>
+      <th>Bus Total Fare</th>
+      <th>Bus Date</th>
+      <th>No of Trip</th>
+      <th>Trip Cover</th>
+      <th>Action</th>
+    </tr></thead>
+    {% for bus in bus_detail %}
+    <tbody>
+    <tr>
+      <td>{{forloop.counter}}</td>
+      <td>{{bus.businfo}}</td>
+      <td>{{bus.broute_from}}</td>
+      <td>{{bus.broute_to}}</td>
+      <td>{{bus.btotalfare}}</td>
+      <td>{{bus.bdate|date:"d/m/Y"}}</td>
+      <td>{{bus.btrip}}</td>
+      <td>{{bus.btriphrs}} hrs</td>
+      <td>Action</td>
+    </tr>
+    </tbody>
+    {% endfor %}
+    </table>   
+    </div> 
+    </div>
+    </div>
+{% endblock %}

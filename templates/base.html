@@ -9,7 +9,7 @@
         body {
               padding-top: 70px;
                 }
-    </style>
+     </style>
   </head>
   <body>
     {% block body %}
@@ -20,8 +20,17 @@
                 {% endif %}      
           <ul class="navbar-nav ml-auto">
           {% if user.is_authenticated %}
+          <li class="nav-item"><a href="/index" class="nav-link">Home</a></li>
         	<li class="nav-item"><a href="{% url 'account_email' %}" class="nav-link">Change E-mail</a></li>
-	        <li class="nav-item"><a href="{% url 'account_logout' %}" class="nav-link">Sign Out</a></li>
+	        <li class="nav-item">
+            <form name='signoutform' method="post" action="{% url 'account_logout' %}">
+                  {% csrf_token %}
+                  {% if redirect_field_value %}
+                  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                  {% endif %}
+                  <a href="#" class="nav-link" onclick="document.forms['signoutform'].submit(); return false;">Sign Out</a>
+            </form>
+          </li>
 	        {% else %}
 	        <li class="nav-item"><a href="{% url 'account_login' %}" class="nav-link">Sign In</a></li>
 	        {% endif %}
