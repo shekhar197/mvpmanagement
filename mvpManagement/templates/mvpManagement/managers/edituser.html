@@ -8,18 +8,18 @@
 </div>
 </div>  
   <hr>
-        <form method="POST" class="post-form" action="/index/manager/edituser/{{user_info.pk}}">
+        <form method="PUT" class="post-form" action="/index/manager/edituser/{{user_info.pk}}">
             {% csrf_token %}     
             <p><label for="id_usertype">Usertype:</label> <select name="usertype" required="" id="id_usertype">
               <option value="{{ user_info.usertype }}">---------</option>
               {% if user_info.usertype == '1' %} 
-              <option value="1" selected="">agencymanager</option>          
+              <option value="1" selected="">AgencyManager</option>          
               {% elif user_info.usertype == '2' %} 
-              <option value="2" selected="">driver</option>            
+              <option value="2" selected="">Driver</option>            
               {% elif user_info.usertype == '3' %} 
-              <option value="3" selected="">conductor</option> 
+              <option value="3" selected="">Conductor</option> 
               {% elif user_info.usertype == '4' %}            
-              <option value="4" selected="">helper</option>
+              <option value="4" selected="">Helper</option>
               {% endif %}
             </select></p>
             <p><label for="id_first_name">First name:</label> <input type="text" name="first_name" maxlength="30" id="id_first_name" value="{{ user_info.first_name }}"></p>

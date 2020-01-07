@@ -44,6 +44,7 @@ def edit(request, id):
 @admin_required
 def destroy(request, id):  
     user_info = User.objects.get(pk=id)
+    print("admin",user_info.__dict__)
     user_info.delete()
     messages.add_message(request, messages.INFO, user_info.username +" successfully deleted.")
     return redirect('/index')

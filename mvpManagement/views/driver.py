@@ -7,8 +7,5 @@ from django.contrib.auth.decorators import login_required
 
 @driver_required
 def home(request):
-    if request.user.usertype == '2':
-        bus_detail = BusSchedule.objects.filter(businfo_driver_id = request.user)
-        return render(request, 'mvpManagement/drivers/driverlist.html',{'bus_detail':bus_detail})
-    else:
-        redirect('/accounts/login/')
+    bus_detail = BusSchedule.objects.filter(businfo_driver_id = request.user)
+    return render(request, 'mvpManagement/drivers/driverlist.html',{'bus_detail':bus_detail})

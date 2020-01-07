@@ -24,12 +24,12 @@
                         <li>User Type: Driver</li>
                         {% elif user_detail.usertype == '3' %}
                         <li>User Type: Conductor</li>
-                        {% elif user_detail.usertype == '2' %}
+                        {% elif user_detail.usertype == '4' %}
                         <li>User Type: Helper</li>
                         {% endif %}
                     </ul></div>
                     <div class="card-footer" align="right">
-                        <a href="/index/manager/edituser/{{user.pk}}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
+                        <a href="/index/manager/edituser/{{user_detail.pk}}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
                     </div>
             </div>
     </div>

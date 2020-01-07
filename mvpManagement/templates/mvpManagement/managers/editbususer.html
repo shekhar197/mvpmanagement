@@ -11,7 +11,7 @@
    {% if bus_info %}
         <form method="POST" class="post-form" action="/index/manager/editbususer/{{bus_info.pk}}">
         {% csrf_token %}
-          {{form.as_table}}
+          {{form.as_p}}
           <button type="submit" class="btn btn-primary">Submit</button> 
         </form>
     {% endif %}
