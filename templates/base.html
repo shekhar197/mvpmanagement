@@ -16,7 +16,7 @@
         <nav class="navbar navbar-expand-sm bg-primary navbar-dark fixed-top">
             <div class="navbar-collapse collapse">
                 {% if user.is_authenticated %}
-                <a routerLink="/" class="navbar-brand" href="/index">Welcome {{ user.username }}</a>
+                <a routerLink="/" class="navbar-brand" href="/">Welcome {{ user.username }}</a>
                 {% endif %}      
           <ul class="navbar-nav ml-auto">
           {% if user.is_authenticated %}

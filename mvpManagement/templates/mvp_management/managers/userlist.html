@@ -31,21 +31,21 @@
   <td>{{user.username}}</td>
   <td>{{user.email}}</td>
   <td>{{user.first_name }} {{user.last_name}}</td>
-  {% if user.usertype == '1' %}
+  {% if user.usertype == 1 %}
   <td>Agency Manager</td>
-  {% elif user.usertype == '2' %}
+  {% elif user.usertype == 2 %}
   <td>Driver</td>
-  {% elif user.usertype == '3' %}
+  {% elif user.usertype == 3 %}
   <td>Conductor</td>
-  {% elif user.usertype == '4' %}
+  {% elif user.usertype == 4 %}
   <td>Helper</td>
   {% else %}
   <td>Unknown</td>
   {% endif %}
   <td>
-      <a href="/index/manager/edituser/{{user.pk}}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
+      <a href="{% url 'manager:edit_user' user.pk %}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
       |
-      <a href="/index/manager/deleteuser/{{user.pk}}"><span class="glyphicon glyphicon-pencil" >Delete</span></a>
+      <a href="{% url 'manager:edit_user' user.pk %}/index/manager/deleteuser/{{user.pk}}"><span class="glyphicon glyphicon-pencil" >Delete</span></a>
   </td>
 </tr>
 </tbody>

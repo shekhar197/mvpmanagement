@@ -7,9 +7,11 @@
 </div>
 </div>
 <hr>
-  <form method="POST" class="post-form" action="{% url 'mvpManagement:create' %}">
+  <form method="POST" class="post-form" action="{% url 'mvpmanagement:create' %}">
     {% csrf_token %} 
-    {{ form.as_p }}
+    <table class="table table-bordered table-striped">
+      {{form.as_table}}
+    </table>
     <button type="submit" class="btn btn-primary">Submit</button> 
   </form>
 {% endblock %}

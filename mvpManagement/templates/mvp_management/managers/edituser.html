@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="d-flex justify-content-center flex-wrap flex-row text-white">
+    <div class="p-2 bg-info">
+<h2> Welcome to MVP Bus Management System</h2>
+</div>
+</div>  
+  <hr>
+    <form method="PUT" class="post-form" action="{% url 'manager:edit_user' user_info.pk %}">
+        {% csrf_token %}     
+        <table class="table table-bordered table-striped">
+          {{form.as_table}}
+        </table>
+        <button type="submit" class="btn btn-primary">Update</button> 
+    </form>
+{% endblock %}

@@ -1,50 +1,73 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from ..forms import UserForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
+
 User = get_user_model()
 from django.http import HttpResponse
 from django.contrib import messages
 from ..decorators import admin_required
 
+# add comment.
+"""Create user - agency manager by Admin"""
 @admin_required
 def admin_create_agency(request):
     if request.method == "POST":
         form = UserForm(request.POST)
         if form.is_valid():
-            form_instance = form.save()
+            form_instance = form.save(commit=False)
             password = User.objects.make_random_password()
-            print("Username - ",form_instance.username)
-            print("User password is - ",password)
-            userinfo = User.objects.get(pk=form_instance.pk)
-            userinfo.set_password(password)
-            userinfo.parent = request.user
-            userinfo.save()
-            print(userinfo.password)
-            return render(request, 'mvpManagement/pageview.html',{'userinfo':userinfo,'password':password})
+            print("Username - ", form_instance.username)
+            print("User password is - ", password)
+            # userinfo = User.objects.get(pk=form_instance.pk)
+            form_instance.set_password(password)
+            form_instance.created_by = request.user
+            form_instance.save()
+            print(form_instance.password)
+            messages.add_message(
+                request,
+                messages.INFO,
+                "username {0} successfully created. and pasword is - {1}".format(
+                    form_instance.username, password
+                ),
+            )
+            return redirect("home")
+        else:
+            return render(request, "mvp_management/admin/userform.html", {"form": form})
     else:
-        if request.user.is_superuser:
-            form = UserForm()
-            return render(request, 'mvpManagement/admin/userform.html', {'form':form})
+        form = UserForm()
+        return render(request, "mvp_management/admin/userform.html", {"form": form})
 
+
+"""Update user - agency manager by Admin"""
 @admin_required
 def edit(request, id):
-    if request.method == "GET":  
-        user_info = User.objects.get(pk=id)
-        return render(request,'mvpManagement/admin/edit.html', {'user_info':user_info})
-    elif request.method == "POST":
-        user_info = User.objects.get(pk=id)
-        form = UserForm(data=request.POST, instance=user_info)  
-        if form.is_valid():  
-            form.save()  
-            messages.add_message(request, messages.INFO, user_info.username +" successfully updated.")
-            return redirect('/index')
-        return render(request, 'mvpManagement/admin/edit.html', {'user_info':user_info})    
+    if request.method == "POST":
+        user_info = get_object_or_404(User, pk=id)
+        form = UserForm(data=request.POST, instance=user_info)
+        if form.is_valid():
+            form_instance = form.save()
+            messages.add_message(
+                request, messages.INFO, "{0} successfully updated.".format(form_instance.username)
+            )
+            return redirect("home")
+        return render(
+            request, "mvp_management/admin/edit.html",  {"form": form, 'user_info':user_info}
+        )
+    else:
+        user_info = get_object_or_404(User, pk=id)
+        form = UserForm(instance=user_info)
+        return render(
+            request, "mvp_management/admin/edit.html", {"form": form, 'user_info':user_info}
+        )
 
+
+"""Delete user - agency manager by Admin"""
 @admin_required
-def destroy(request, id):  
+def destroy(request, id):
     user_info = User.objects.get(pk=id)
-    print("admin",user_info.__dict__)
     user_info.delete()
-    messages.add_message(request, messages.INFO, user_info.username +" successfully deleted.")
-    return redirect('/index')
+    messages.add_message(
+        request, messages.INFO, user_info.username + " successfully deleted."
+    )
+    return redirect("home")

@@ -16,7 +16,7 @@
                         <li>First Name: {{user_detail.first_name|title}}</li>
                         <li>Last Name: {{user_detail.last_name|title}}</li>
                         <li>Username: {{user_detail.username}}</li>
-                        <li>Password: ****************</li>
+                        <li>Password: ************</li>
                         <li>Email Name: {{user_detail.email}}</li>
                         <li>Date Join: {{user_detail.date_joined|date:"d/m/Y"}}</li>
                         <li>Last Login: {{user_detail.last_login|date:"d/m/Y"}}</li>
@@ -29,7 +29,7 @@
                         {% endif %}
                     </ul></div>
                     <div class="card-footer" align="right">
-                        <a href="/index/manager/edituser/{{user_detail.pk}}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
+                        <a href="{% url 'manager:edit_user' user_detail.pk %}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
                     </div>
             </div>
     </div>

@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <div class="d-flex justify-content-center flex-wrap flex-row text-white">
     <div class="p-2 bg-info">
@@ -21,6 +20,7 @@
       <th>Bus Number</th>
       <th>Bus Route</th>
       <th>Bus Total Fare</th>
+      <th>Bus Total Trip</th>
       <th>Bus Driver</th>
       <th>Bus Conductor</th>
       <th>Bus Helper</th>
@@ -35,15 +35,16 @@
       <td>{{bus.businfo}}</td>
       <td>{{bus.broute_from}} to {{bus.broute_to}}</td>
       <td>{{bus.btotalfare}}</td>
+      <td>{{bus.totaltrip}}</td>
       <td>{{bus.businfo_driver}}</td>
       <td>{{bus.businfo_conductor}}</td>
       <td>{{bus.businfo_helper}}</td>
       <td>{{bus.bus_from|date:"d/m/Y"}}</td>
       <td>{{bus.bus_to|date:"d/m/Y"}}</td>
       <td>
-          <a href="/index/manager/editbususer/{{bus.pk}}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
+          <a href="{% url 'manager:edit_assign_bus' bus.pk %}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
           |
-          <a href="/index/manager/deletebususer/{{bus.pk}}"><span class="glyphicon glyphicon-pencil" >Delete</span></a>
+          <a href="{% url 'manager:delete_assign_bus' bus.pk %}"><span class="glyphicon glyphicon-pencil" >Delete</span></a>
       </td>
     </tr>
     </tbody>
@@ -77,6 +78,4 @@
           {% endif %}
         </div>
       </div>
-
-
-      {% endblock %}
+{% endblock %}

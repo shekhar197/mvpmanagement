@@ -23,5 +23,5 @@ handler500 = 'mvpManagement.views.mvp_management.handler500'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('index/', include('mvpManagement.urls')),
+    path('', include('mvpManagement.urls')),
 ]

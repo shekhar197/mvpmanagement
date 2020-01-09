@@ -67,7 +67,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'mvpBusManagement.urls'
 
-LOGIN_REDIRECT_URL = '/index'
+LOGIN_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_REDIRECT_URL ='/accounts/login/'
 
 TEMPLATES = [
